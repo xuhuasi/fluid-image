@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fluid image</title>
+    <style>
+        .sy_pic{
+            width:500px;
+            height:500px;
+            border:#000 solid 1px;
+            text-align:center;
+        }
+    </style>
+
+</head>
+<body>
+<div class="sy_pic" id="imgcontainer"><img src="img/1.jpg" /></div>
+</body>
+
+
+<script  type="text/javascript" language="javascript">
+    window.onload=function(){
+        changeImgSize();
+    }
+    function changeImgSize(){
+        var getContainer=document.getElementById('imgcontainer');
+        var getIMG=getContainer.getElementsByTagName('img')[0];
+        var fw=getContainer.offsetWidth-(2*getContainer.clientLeft);
+        var fh=getContainer.offsetHeight-(2*getContainer.clientTop);
+        var iw=getIMG.width;
+        var ih=getIMG.height;
+        var m=iw/fw;
+        var n=ih/fh;
+        if(m>=1&&n<=1)
+        {
+            iw=Math.ceil(iw/m);
+            ih=Math.ceil(ih/m);
+            getIMG.width=iw;
+            getIMG.height=ih;
+        }
+        else if(m<=1&&n>=1)
+        {
+            iw=Math.ceil(iw/n);
+            ih=Math.ceil(ih/n);
+            getIMG.width=iw;
+            getIMG.height=ih;
+        }
+        else if(m>=1&&n>=1)
+        {
+            getMAX=Math.max(m,n);
+            iw=Math.ceil(iw/getMAX);
+            ih=Math.ceil(ih/getMAX);
+            getIMG.width=iw;
+            getIMG.height=ih;
+        }
+        if(getIMG.height<fh)
+        {
+            var getDistance=Math.floor((fh-getIMG.height)/2);
+            getIMG.style.marginTop=getDistance.toString()+"px";
+        }
+    }
+</script>
+</html>
